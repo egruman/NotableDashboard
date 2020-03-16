@@ -2,9 +2,9 @@ import flask
 
 app = flask.Flask("__main__")
 
-serverState = {'doctors' : {'ID1' : {'fname' : 'A', 'lname' : 'a', 'email' : 'a@notablehealth.com', 'appts' : {}}, 
-                            'ID2' : {'fname' : 'B', 'lname' : 'b', 'email' : 'b@notablehealth.com', 'appts' : {}}, 
-                            'ID3' : {'fname' : 'C', 'lname' : 'c', 'email' : 'c@notablehealth.com', 'appts' : {}}}}
+serverState = {'doctors' : {'ID1' : {'fname' : 'Julius', 'lname' : 'Hibbert', 'email' : 'jhibbert@notablehealth.com', 'appts' : {}}, 
+                            'ID2' : {'fname' : 'Algernop', 'lname' : 'Krieger', 'email' : 'arieger@notablehealth.com', 'appts' : {}}, 
+                            'ID3' : {'fname' : 'Nick', 'lname' : 'Riviera', 'email' : 'nriviera@notablehealth.com', 'appts' : {}}}}
 
 @app.route("/")
 def index():
