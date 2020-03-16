@@ -91,7 +91,7 @@ class App extends Component{
   addAppt(comp, event){
     event.preventDefault();
     var appt = comp.state;
-    var apptID = Date.now();
+    var apptID = Date.now().toString();
     var dr = this.state.viewDoctor;
     var date = getDt(this.state.viewDate);
     if(appt.lname === "" || appt.fname === ""){
