@@ -1,14 +1,27 @@
 import flask
+import datetime
 
 app = flask.Flask("__main__")
 
-serverState = {'doctors' : {'ID1' : {'fname' : 'Julius', 'lname' : 'Hibbert', 'email' : 'jhibbert@notablehealth.com', 'appts' : {}}, 
-                            'ID2' : {'fname' : 'Algernop', 'lname' : 'Krieger', 'email' : 'arieger@notablehealth.com', 'appts' : {}}, 
-                            'ID3' : {'fname' : 'Nick', 'lname' : 'Riviera', 'email' : 'nriviera@notablehealth.com', 'appts' : {}}}}
+doctorList = [{'fname' : 'Julius', 'lname' : 'Hibbert', 'email' : 'jhibbert@notablehealth.com'},
+            {'fname' : 'Algernop', 'lname' : 'Krieger', 'email' : 'arieger@notablehealth.com'},
+            {'fname' : 'Nick', 'lname' : 'Riviera', 'email' : 'nriviera@notablehealth.com'}]
+
+serverState = {'doctors' : {}}
+
+def doctorDataInit(inputs):
+    for d in inputs:
+        uniqueID = d['fname']+d['lname']+str(datetime.datetime.now())
+        serverState['doctors'][uniqueID] = dict(d)
+        serverState['doctors'][uniqueID]['appts'] = {}
+
+doctorDataInit(doctorList)
+
+print('server started')
 
 @app.route("/")
 def index():
-    print('started')
+    print('connected')
     return flask.render_template("index.html", token="Doctor Appointment Dashboard")
 
 @app.route('/time')
