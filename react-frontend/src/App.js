@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import DatePicker from "react-datepicker";
 import TimePicker from 'react-time-picker';
 import './App.css';
+
 function getDt(date){
   return date.getFullYear().toString() + '/' +date.getMonth().toString() + '/' +date.getDate().toString();
 }
@@ -36,6 +37,8 @@ class InputBox extends Component{
       <input type="text" value={this.state.lname} name="Last Name"
           onChange={event => this.setState({lname : event.target.value})} 
           placeholder="Last Name"/> 
+      </label>
+      <label> Time: {" "} 
       <TimePicker clearIcon={null}
           value={this.state.time}
           onClockClose={()=>this.setState(function(prev){
@@ -55,12 +58,15 @@ class InputBox extends Component{
             return {time: hr_mn[0]+':'+zero+min.toString()};
           })}
           onChange={newTime => this.setState({time : newTime})} />
+      </label>
+      <label> Kind: {" "} 
       <select value={this.state.kind} onChange={event => this.setState({kind : event.target.value})}>
             <option value="New Patient">New Patient</option>
             <option value="Follow-up">Follow-up</option>
           </select>
-      <input type="submit" value="Enter"/> 
       </label>
+      <input type="submit" value="Enter"/> 
+      
       </form></div>)
   }
 }
@@ -115,7 +121,7 @@ class App extends Component{
       prev.doctorData[dr].appts[date][apptID] = appt;
       return {doctorData : prev.doctorData}});
     fetchWith('/add-appt', 'POST', params);
-    comp.setState({fname : "", lname : "", kind: ""});
+    comp.setState({fname : "", lname : ""});
   }
 
   removeAppt(apptID){
@@ -147,6 +153,7 @@ class App extends Component{
             <a onClick={event => this.removeAppt(item[0])}> | (Remove)</a></p>)}</div>);
         }
         schedDisplay = (<div>{schedTableDisplay}
+            <br/><br/>
             <InputBox addAppt={app.addAppt} /></div>);
       }
       DoctorDisplay = (<div>
@@ -160,7 +167,7 @@ class App extends Component{
         {schedDisplay}</div>)
     }
     return (<div>
-      <h1> Physician List: </h1>
+      <h2> Physician List: </h2>
       <ul>{doctorList.map(function(item){
           var selected = ""
           if(item[0] == app.state.viewDoctor){
@@ -172,7 +179,7 @@ class App extends Component{
       <div class="App">
         <h1>{window.token}</h1>
         {DoctorDisplay}
-        <br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/><br/><br/>
         </div></div>
   );
   }
