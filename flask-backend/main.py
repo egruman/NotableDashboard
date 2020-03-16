@@ -24,10 +24,6 @@ def index():
     print('connected')
     return flask.render_template("index.html", token="Doctor Appointment Dashboard")
 
-@app.route('/time')
-def get_current_time():
-    return {'time': time.time()}
-
 @app.route('/get-data', methods=['GET'])
 def get_data():
     req = flask.request.get_json()
@@ -35,7 +31,7 @@ def get_data():
 
 @app.route('/add-appt', methods=['POST'])
 def appt():
-    print('hello')
+    print('Appointment added')
     req = flask.request.get_json()
     ID = req['ID']
     date = req['date']
@@ -48,12 +44,11 @@ def appt():
 
 @app.route('/rmv-appt', methods=['DELETE'])
 def remove():
+    print('Appointment removed')
     req = flask.request.get_json()
     ID = req['ID']
     date = req['date']
     apptID = req['apptID']
-    print(serverState['doctors'][ID]['appts'][date])
-    print(apptID)
     del serverState['doctors'][ID]['appts'][date][apptID]
     return flask.jsonify({'status': 'removed'})
     

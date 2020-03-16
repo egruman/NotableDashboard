@@ -104,7 +104,6 @@ class App extends Component{
       var apptsList = Object.values(this.state.doctorData[dr].appts[date]);
       for(var i in apptsList){
         var other = apptsList[i];
-        console.log(JSON.stringify(other) +'==' + appt.time.toString());
         if(other.time === appt.time){
           total++;
         }
